@@ -212,8 +212,9 @@ if audio_file:
         est_seconds = max(10, int(duration_min * speed * 60))
         est_str = f"{est_seconds//60}m {est_seconds%60}s" if est_seconds >= 60 else f"~{est_seconds}s"
 
-        st.markdown(f"⏱️ **Estimated time:** `{est_str}`")
-        bar = st.progress(0, text="Starting…")
+        st.markdown(f"⏱️ **Estimated time:** `{est_str}` (not counting model load on first run)")
+        st.caption("⏳ First run only: loading the model may take 1–2 min. Subsequent runs start instantly.")
+        bar = st.progress(0, text="Loading model into memory — please wait, this only happens once…")
         stop_flag = threading.Event()
 
         def animate():
